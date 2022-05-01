@@ -47,8 +47,8 @@ app.use((req, res, next) => {
                 method: req.method,
                 url: req.url,
                 protocol: req.protocol,
-                httpversion: reqhttpVersion,
-                statis: res.statusCode,
+                httpversion: req.httpVersion,
+                status: res.statusCode,
                 referer: req.headers['referer'],
                 useragent: req.headers['user-agent']
               }
@@ -59,8 +59,6 @@ app.use((req, res, next) => {
   next()
 
 })
-
-
 
 app.get('/app/', (req, res) => {
     res.statusCode = 200;
@@ -78,6 +76,7 @@ if (args.debug == true) {
       console.error(e)
     }
   });
+  
   app.get('/app/error', (req, res) => {
     res.status(500);
     throw new Error('Error test completed successfully.')

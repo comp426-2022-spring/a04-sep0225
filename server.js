@@ -18,7 +18,7 @@ const server = app.listen(port, () => {
 if (args.help == true) {
   const help = (`server.js [options]
 
-  --por		Set the port number for the server to listen on. Must be an integer
+  --port		Set the port number for the server to listen on. Must be an integer
               	between 1 and 65535.
 
   --debug	If set to true, creates endlpoints /app/log/access/ which returns

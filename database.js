@@ -1,10 +1,8 @@
-"use strict";
+const Database = require('better-sqlite3');
 
-const database = require('better-sqlite3')
+const logdb = new Database('log.db');
 
-const db = new database('log.db')
-
-const stmt = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' and name = 'accesslog';`);
+const stmt = logdb.prepare(`SELECT name FROM sqlite_master WHERE type='table' and name = 'accesslog';`);
 
 let row = stmt.get()
 
@@ -19,11 +17,11 @@ if (row === undefined) {
                         protocol TEXT,
                         httpversion TEXT,
                         status INTEGER,
-                        referrer TEXT,
+                        referer TEXT,
                         useragent TEXT);`;
-    db.exec(sqlInit)
+    logdb.exec(sqlInit);
 } else {
     console.log("Log database already exists.")
 }
 
-module.exports = db
+module.exports = logdb
